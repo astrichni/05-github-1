@@ -1,6 +1,50 @@
 ---
-title: "Analysis 1"
-author: "Astri Cahyani is a data maestro"
+title: "A Beautiful Graphic"
+author: "Astri Cahyani"
 format: html
+execute: 
+  echo: false
+  warning: false
+  message: false
 ---
+
+Astri Cahyani
+
+```{r}
+#| include: false
+
+library(dplyr)
+library(ggplot2)
+```
+
+```{r}
+#| warning: false
+#| message: false
+
+# Filter for a few iconic hurricanes
+major_storms <- storms %>% 
+  filter(name %in% c("Katrina", "Andrew", "Harvey", "Ian"))
+
+# Create a beautiful tracking graphic
+ggplot(data = major_storms, aes(x = long, y = lat, color = wind, group = interaction(name, year))) +
+  geom_path(size = 1.2, alpha = 0.8) +
+  geom_point(size = 2, alpha = 0.6) +
+  facet_wrap(~ name, scales = "free") +
+  scale_color_viridis_c(option = "plasma", name = "Wind Speed\n(knots)") +
+  theme_minimal(base_size = 13) +
+  theme(
+    plot.title = element_text(face = "bold", size = 16),
+    plot.subtitle = element_text(color = "gray40", margin = margin(b = 15)),
+    strip.text = element_text(face = "bold", size = 12),
+    panel.grid.minor = element_blank(),
+    legend.position = "right"
+  ) +
+  labs(
+    title = "Tracking Historic Hurricanes",
+    subtitle = "Storm paths colored by maximum sustained wind speed",
+    x = "Longitude",
+    y = "Latitude"
+  )
+```
+
 
