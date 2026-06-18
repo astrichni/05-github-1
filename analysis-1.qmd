@@ -1,6 +1,6 @@
 ---
 title: "Analysis 1"
-author: "Astri Cahyani"
+author: "Astri Cahyani is a data maestro"
 format: html
 ---
 
